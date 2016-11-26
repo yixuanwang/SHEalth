@@ -1,6 +1,6 @@
 //fct that creates new user db type
 static var patientID = 0;
-function User(phone, region, resultArray) {
+function User(phone, resultArray) {
 	this.id = patientID++;
 	this.phone = phone;
 	this.age = setAge(resultArray); //returns age
