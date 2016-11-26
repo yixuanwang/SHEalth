@@ -20,7 +20,6 @@ app.get('/', function(req, res) {
 app.get('/about', function(req, res) {
 	res.render('about');
 });
-
 // 404 catch-all handler (middleware)
 app.use(function(req, res, next){
 	res.status(404);
