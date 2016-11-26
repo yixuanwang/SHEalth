@@ -47,4 +47,5 @@ function data (phone, symptom)
 
 };
 
-data(323333, "Headache");
+//changed to test
+data(person1.getPhone(), person1.getSymptoms());
