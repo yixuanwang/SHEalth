@@ -1,5 +1,5 @@
 //fct that creates new user db type
-const var patientID = 0;
+static var patientID = 0;
 function User(phone, region, symptoms) {
 	this.id = patientID++;
 	this.phone = phone;
@@ -8,4 +8,9 @@ function User(phone, region, symptoms) {
 	this.getPhone = function {
 		return this.phone;
 	};
-}
+}  
+
+const var resultLiteral = ["age", "sex", "fatigue", "headache", "dizziness",
+						   "nausea", "vomit", "fever", "rashes", "diarrhea",
+						   "constipation", "cough", "sore throat", "missed period"];
+						   
