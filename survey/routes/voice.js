@@ -1,14 +1,13 @@
 var twilio = require('twilio');
 var SurveyResponse = require('../models/SurveyResponse');
 var survey = require('../survey_data');
+// var connects = require('./connect.js');
 
 // Main interview loop
 exports.interview = function(request, response) {
     var phone = request.body.From;
     var input = request.body.RecordingUrl || request.body.Digits;
-    console.log("set");
     var twiml = new twilio.TwimlResponse();
-    console.log("variables set");
 
     // helper to append a new "Say" verb with alice voice
     function say(text) {
@@ -17,35 +16,49 @@ exports.interview = function(request, response) {
 
     // respond with the current TwiML content
     function respond() {
-        response.type('text/xml');
-        response.send(twiml.toString());
-    }
-
+//         var accountSid = 'AC2f4c4e31a5cfb021e873486016f59cf3'; 
+//         var authToken = '649611903497fa082c5dc933fd5bf2f7'; 
+ 
+// //require the Twilio module and create a REST client 
+//         var client = require('twilio')(accountSid, authToken); 
+ 
+//         client.messages.create({ 
+//             to: phone, 
+//             from: "+12268940605", 
+//             body: "f u"
+//         }, function(err, message) { 
+//             console.log(message.sid); 
+//         });
+            response.type('text/xml');
+            response.send(twiml.toString());
+        }
     // Find an in-progess survey if one exists, otherwise create one
     SurveyResponse.advanceSurvey({
         phone: phone,
         input: input,
         survey: survey
     }, function(err, surveyResponse, questionIndex) {
-        console.log("reached");
         var question = survey[questionIndex];
+        //var isFirstBooleanQuestion = 1;
 
         if (err || !surveyResponse) {
-            console.log("reached speech");
             say('Terribly sorry, but an error has occurred. Goodbye.');
             return respond();
         }
 
         // If question is null, we're done!
         if (!question) {
+            // connects.retrieve(12344);
+            say("Our diagnosis indicates that you might have dysentry.  A local health worker may be able to assist at 88024739201");
+            say("Our records indicate that a community member with similar symptoms is willing to communicate at 880247239102");
             say('Thank you for taking this survey. Goodbye!');
             return respond();
         }
 
         // Add a greeting if this is the first question
         if (questionIndex === 0) {
-            say('Thank you for taking our survey. Please listen carefully '
-                + 'to the following questions.');
+            say('This is Shealth. We are here to help you diagnose your disease'
+                + 'and help you find our community health volunteer.');
         }
 
         // Otherwise, ask the next question
@@ -62,19 +75,24 @@ exports.interview = function(request, response) {
                     + '/transcribe/' + questionIndex,
                 maxLength: 60
             });
-        } else if (question.type === 'boolean') {
-            say('Press one for "yes", and 0 for "no".');
+        } else if (question.type === 'boolean' && questionIndex === 1) {
+            say('Press one for "yes", and any other key for "no" for the following question.');
             twiml.gather({
                 timeout: 10,
                 numDigits: 1
             });
-        } else {
+        } else if (question.type === 'number'){
             // Only other supported type is number
             say('Enter the number using the number keys on your telephone.' 
                 + ' Press star to finish.');
             twiml.gather({
                 timeout: 10,
                 finishOnKey: '*'
+            });
+        } else {
+            twiml.gather({
+                timeout: 10,
+                numDigits: 1
             });
         }
 

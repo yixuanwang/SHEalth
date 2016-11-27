@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var twilio = require('twilio');
 
 // Define survey response model schema
 var SurveyResponseSchema = new mongoose.Schema({
@@ -18,19 +19,16 @@ var SurveyResponseSchema = new mongoose.Schema({
 // For the given phone number and survey, advance the survey to the next
 // question
 SurveyResponseSchema.statics.advanceSurvey = function(args, cb) {
-
     var surveyData = args.survey;
     var phone = args.phone;
     var input = args.input;
     var surveyResponse;
-    console.log("yes");
 
     // Find current incomplete survey
     SurveyResponse.findOne({
         phone: phone,
         complete: false
     }, function(err, doc) {
-        console.log("yes");
         surveyResponse = doc || new SurveyResponse({
             phone: phone
         });
@@ -41,10 +39,8 @@ SurveyResponseSchema.statics.advanceSurvey = function(args, cb) {
     // to ask
     function processInput() {
         // If we have input, use it to answer the current question
-        console.log("yes");
         var responseLength = surveyResponse.responses.length
         var currentQuestion = surveyData[responseLength];
-        console.log("yes");
 
         // if there's a problem with the input, we can re-ask the same question
         function reask() {
@@ -52,9 +48,7 @@ SurveyResponseSchema.statics.advanceSurvey = function(args, cb) {
         }
 
         // If we have no input, ask the current question again
-        console.log("yes");
         if (!input) return reask();
-        console.log("yes");
 
         // Otherwise use the input to answer the current question
         var questionResponse = {};
@@ -96,6 +90,8 @@ SurveyResponseSchema.statics.advanceSurvey = function(args, cb) {
                 cb.call(surveyResponse, err, surveyResponse, responseLength+1);
             }
         });
+
+
     }
 };
 

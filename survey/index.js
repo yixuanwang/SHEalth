@@ -8,8 +8,8 @@ var config = require('./config');
 var voice = require('./routes/voice');
 var message = require('./routes/message');
 var results = require('./routes/results');
-
-var twilio = require('twilio');
+// var connects = require('./connect.js');
+// require('.models/SurveyRespose.js');
 
 // initialize MongoDB connection
 mongoose.connect(config.mongoUrl);
@@ -22,12 +22,6 @@ app.use(morgan('combined'));
 
 // Twilio Webhook routes
 app.post('/voice', voice.interview);
-// app.post('/voice', function(req, res) {
-// 	console.log("connected");
-// 	var twiml = new twilio.TwimlResponse();
-// 	twiml.say("hello", { voice: 'alice'});
-// });
-
 app.post('/voice/:responseId/transcribe/:questionIndex', voice.transcription);
 app.post('/message', message);
 

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patients' statistical information</title>
+    <link rel="shortcut icon" 
+        href="//twilio.com/bundles/marketing/img/favicons/favicon.ico">
+    <link rel="apple-touch-icon" 
+        href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png">
+    <link rel="apple-touch-icon" sizes="72x72" 
+        href="//twilio.com//bundles/marketing/img/favicons/favicon_72.png">
+    <link rel="apple-touch-icon" sizes="114x114" 
+        href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png">
+
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet"
+        href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" 
+        href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<!-- App Layout -->
+<section id="main" class="container">
+    <h1>Patients' statistical information</h1>
+    <p>
+        Based on our users' input, here is the area's syptom collection and their description message
+    </p>
+
+    <h3>Showing <span id="total"></span> Total Responses</h3>
+    <hr/>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>"Age Distribution"</h3>
+            <canvas id="ageChart" width="300" height="300"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <h3>"Do you have fatigue?"</h3>
+            <canvas id="fatigueChart" width="300" height="300"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <h3>"Do you have headaches?"</h3>
+            <canvas id="headacheChart" width="300" height="300"></canvas>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>"Have you recently vomited?"</h3>
+            <canvas id="vomitedChart" width="300" height="300"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <h3>"Do you have a fever?"</h3>
+            <canvas id="feverChart" width="300" height="300"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <h3>"Do you have rashes?"</h3>
+            <canvas id="rashesChart" width="300" height="300"></canvas>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>"Do you have diarrhea?"</h3>
+            <canvas id="diarrheaChart" width="300" height="300"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <h3>"Do you have a cough?"</h3>
+            <canvas id="coughChart" width="300" height="300"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <h3>"Do you have a missed period?"</h3>
+            <canvas id="periodChart" width="300" height="300"></canvas>
+        </div>
+    </div>
+
+    <div class="row">
+        <h3>"Some more things about users' symptoms"</h3>
+        <table id="turtleResponses">
+            <tr>
+                <th>Response Text / Transcript</th>
+                <th>Recording</th>
+            </tr>
+        </table>
+    </div>
+
+</section>
+
+<footer class="container">
+    Made with <i class="fa fa-heart"></i> by SHealth 
+</footer>
+
+<!-- JS Dependencies -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="chart.js"></script>
+
+<!-- App script -->
+<script src="index.js"></script>
+
+</body>
+</html>
