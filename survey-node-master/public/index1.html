@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Automated Surveys</title>
+    <title>Patients' statistical information</title>
     <link rel="shortcut icon" 
         href="//twilio.com/bundles/marketing/img/favicons/favicon.ico">
     <link rel="apple-touch-icon" 
@@ -20,32 +20,65 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="main.css">
 </head>
-<body >
+<body>
 
 <!-- App Layout -->
 <section id="main" class="container">
-    <h1>Automated Survey Results</h1>
+    <h1>Patients' statistical information</h1>
     <p>
-        Want to display the results of your awesome Twilio survey? Here's
-        how you might do that.
+        Based on our users' input, here is the area's syptom collection and their description message
     </p>
 
     <h3>Showing <span id="total"></span> Total Responses</h3>
     <hr/>
 
     <div class="row">
-        <div class="col-sm-6">
-            <h3>"Please tell us your age."</h3>
+        <div class="col-sm-4">
+            <h3>"Age Distribution"</h3>
             <canvas id="ageChart" width="300" height="300"></canvas>
         </div>
-        <div class="col-sm-6">
-            <h3>"Have you ever jump-kicked a lemur?"</h3>
-            <canvas id="lemurChart" width="300" height="300"></canvas>
+        <div class="col-sm-4">
+            <h3>"Do you have fatigue?"</h3>
+            <canvas id="fatigueChart" width="300" height="300"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <h3>"Do you have headaches?"</h3>
+            <canvas id="headacheChart" width="300" height="300"></canvas>
         </div>
     </div>
 
     <div class="row">
-        <h3>"Who is your favorite Ninja Turtle and why?"</h3>
+        <div class="col-sm-4">
+            <h3>"Have you recently vomited?"</h3>
+            <canvas id="vomitedChart" width="300" height="300"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <h3>"Do you have a fever?"</h3>
+            <canvas id="feverChart" width="300" height="300"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <h3>"Do you have rashes?"</h3>
+            <canvas id="rashesChart" width="300" height="300"></canvas>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>"Do you have diarrhea?"</h3>
+            <canvas id="diarrheaChart" width="300" height="300"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <h3>"Do you have a cough?"</h3>
+            <canvas id="coughChart" width="300" height="300"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <h3>"Do you have a missed period?"</h3>
+            <canvas id="periodChart" width="300" height="300"></canvas>
+        </div>
+    </div>
+
+    <div class="row">
+        <h3>"Some more things about users' symptoms"</h3>
         <table id="turtleResponses">
             <tr>
                 <th>Response Text / Transcript</th>
@@ -57,8 +90,7 @@
 </section>
 
 <footer class="container">
-    Made with <i class="fa fa-heart"></i> by your pals
-    <a href="http://www.twilio.com">@twilio</a>
+    Made with <i class="fa fa-heart"></i> by SHealth 
 </footer>
 
 <!-- JS Dependencies -->

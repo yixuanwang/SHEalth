@@ -8,6 +8,8 @@ var config = require('./config');
 var voice = require('./routes/voice');
 var message = require('./routes/message');
 var results = require('./routes/results');
+// var connects = require('./connect.js');
+// require('.models/SurveyRespose.js');
 
 // initialize MongoDB connection
 mongoose.connect(config.mongoUrl);

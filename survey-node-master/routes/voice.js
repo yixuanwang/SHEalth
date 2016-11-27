@@ -1,6 +1,7 @@
 var twilio = require('twilio');
 var SurveyResponse = require('../models/SurveyResponse');
 var survey = require('../survey_data');
+// var connects = require('./connect.js');
 
 // Main interview loop
 exports.interview = function(request, response) {
@@ -15,9 +16,22 @@ exports.interview = function(request, response) {
 
     // respond with the current TwiML content
     function respond() {
-        response.type('text/xml');
-        response.send(twiml.toString());
-    }
+//         var accountSid = 'AC2f4c4e31a5cfb021e873486016f59cf3'; 
+//         var authToken = '649611903497fa082c5dc933fd5bf2f7'; 
+ 
+// //require the Twilio module and create a REST client 
+//         var client = require('twilio')(accountSid, authToken); 
+ 
+//         client.messages.create({ 
+//             to: phone, 
+//             from: "+12268940605", 
+//             body: "f u"
+//         }, function(err, message) { 
+//             console.log(message.sid); 
+//         });
+            response.type('text/xml');
+            response.send(twiml.toString());
+        }
     // Find an in-progess survey if one exists, otherwise create one
     SurveyResponse.advanceSurvey({
         phone: phone,
@@ -34,6 +48,9 @@ exports.interview = function(request, response) {
 
         // If question is null, we're done!
         if (!question) {
+            // connects.retrieve(12344);
+            say("Our diagnosis indicates that you might have dysentry.  A local health worker may be able to assist at 88024739201");
+            say("Our records indicate that a community member with similar symptoms is willing to communicate at 880247239102");
             say('Thank you for taking this survey. Goodbye!');
             return respond();
         }

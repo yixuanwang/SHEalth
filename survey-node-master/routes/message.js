@@ -9,6 +9,20 @@ module.exports = function(request, response) {
     
     // respond with message TwiML content
     function respond(message) {
+    //     var accountSid = 'AC2f4c4e31a5cfb021e873486016f59cf3'; 
+    //     var authToken = '649611903497fa082c5dc933fd5bf2f7'; 
+ 
+    // //require the Twilio module and create a REST client 
+    //     var client = require('twilio')(accountSid, authToken); 
+ 
+    //     client.messages.create({ 
+    //         to: phone, 
+    //         from: "+12268940605", 
+    //         body: "f u"
+    //     }, function(err, message) { 
+    //         console.log(message.sid); 
+    //     });
+
         var twiml = new twilio.TwimlResponse();
         twiml.message(message);
         response.type('text/xml');
@@ -51,6 +65,7 @@ module.exports = function(request, response) {
 
         // If question is null, we're done!
         if (!question) {
+            respond("Our diagnosis indicates that you may be pregnant.  A local health worker may be able to assist at 88093739201. Our records indicate that a community member with similar symptoms is willing to communicate at 880247329102.");
             return respond('Thank you for taking this survey. Goodbye!');
         }
 
