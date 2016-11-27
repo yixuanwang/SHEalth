@@ -1,5 +1,8 @@
 //fct that creates new user db type
-static var patientID = 0;
+var patientID = 0;
+const var resultLiteral = ["age", "sex", "fatigue", "headache", "dizziness",
+						   "nausea", "vomit", "fever", "rashes", "diarrhea",
+						   "constipation", "cough", "sore throat", "missed period"];
 function User(phone, resultArray) {
 	this.id = patientID++;
 	this.phone = phone;
@@ -14,25 +17,21 @@ function User(phone, resultArray) {
 	this.getSymptoms = function() { return this.results; };
 }  
 
-const var resultLiteral = ["age", "sex", "fatigue", "headache", "dizziness",
-						   "nausea", "vomit", "fever", "rashes", "diarrhea",
-						   "constipation", "cough", "sore throat", "missed period"];
-
 function setAge(resultArray) {
 	//index 0
 	var age;
 	switch(resultArray[0]) {
-		case 1: age = "10--";
+		case 0: age = "10--";
 			    break;
-		case 2: age = "10 - 20";
+		case 1: age = "10 - 20";
 			    break;
-		case 3: age = "20 - 30";
+		case 2: age = "20 - 30";
 			    break;
-		case 4: age = "30 - 40";
+		case 3: age = "30 - 40";
 			    break;
-		case 5: age = "40 - 50";
+		case 4: age = "40 - 50";
 			    break;
-		case 6: age = "50++";
+		case 5: age = "50++";
 			    break;
 	}
 	return age;
@@ -40,11 +39,11 @@ function setAge(resultArray) {
 
 function setSex(resultArray) {
 	//index 2
-	return ((resultArray[1] == 1)? "M":"F");
+	return ((resultArray[1] == 0)? "M":"F");
 }
 
 function surveyResults(resultArray, resultLiteral) {
-	var results;
+	var results = [];
 	var index = 0;
 	//since index 0 and 1 is age and sex, start with index = 2
 	for(i = 2; i < resultArray.length; i++) {

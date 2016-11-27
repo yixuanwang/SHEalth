@@ -47,14 +47,16 @@ function data (phone, symptom)
 
 };
 
+var patientID = 0;
+
 //testcode.js
 var phone = 123459999;
 var resultA = [1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var patientID = 0;
-var resultLiteral = ["age", "sex", "fatigue", "headache", "dizziness",
-						   "nausea", "vomit", "fever", "rashes", "diarrhea",
-						   "constipation", "cough", "sore throat", "missed period"];
 
+var resultLiteral = ["age", "sex", "fatigue", "headache", "dizziness",
+       				 "nausea", "vomit", "fever", "rashes", "diarrhea",
+					 "constipation", "cough", "sore throat", "missed period"];
 var person1 = new User(phone, resultA);
 
 
@@ -66,39 +68,36 @@ data(person1.getPhone(), person1.getSymptoms());
 //userfct.js
 //fct that creates new user db type
 
-//console.log(resultLiteral);
 function User(phone, resultArray) {
 	this.id = patientID++;
 	this.phone = phone;
 	this.age = setAge(resultArray); //returns age
 	this.sex = setSex(resultArray);
 	/*this.region = function to get region num;*/
-
-  //console.log(resultLiteral);
-  //console.log(patientID);
 	this.results = surveyResults(resultArray, resultLiteral);
+	this.resultsBin = surveyResultsBin(resultArray);
 	this.getID = function() { return this.id; };
 	this.getPhone = function() { return this.phone;	};
 	this.getAge = function() { return this.age; };
 	this.getSex = function() { return this.sex; };
 	this.getSymptoms = function() { return this.results; };
-};
+}
 
 function setAge(resultArray) {
 	//index 0
 	var age;
 	switch(resultArray[0]) {
-		case 1: age = "10--";
+		case 0: age = "10--";
 			    break;
-		case 2: age = "10 - 20";
+		case 1: age = "10 - 20";
 			    break;
-		case 3: age = "20 - 30";
+		case 2: age = "20 - 30";
 			    break;
-		case 4: age = "30 - 40";
+		case 3: age = "30 - 40";
 			    break;
-		case 5: age = "40 - 50";
+		case 4: age = "40 - 50";
 			    break;
-		case 6: age = "50++";
+		case 5: age = "50++";
 			    break;
 	}
 	return age;
@@ -106,7 +105,7 @@ function setAge(resultArray) {
 
 function setSex(resultArray) {
 	//index 2
-	return ((resultArray[1] == 1)? "M":"F");
+	return ((resultArray[1] == 0)? "M":"F");
 }
 
 function surveyResults(resultArray, resultLiteral) {
@@ -118,10 +117,20 @@ function surveyResults(resultArray, resultLiteral) {
       //results.push(resultLiteral[i]);
       //console.log(resultLiteral);
       //console.log(results);
-      results[index] = resultLiteral[i];
-      index = index+1;
+      results[index++] = resultLiteral[i];
 		}
 	}
 
 	return results;
+}
+
+function surveyResultsBin(resultArray) {
+	var results = [];
+	var index = 0;
+	//since index 0 and 1 is age and sex, start with index = 2
+	for(i = 2; i < resultArray.length; i++) {
+		results[index++] = resultLiteral[i];
+	}
+
+	return results;	
 }
