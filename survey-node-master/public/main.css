@@ -78,7 +78,7 @@ div.foo{
   z-index: 3;
   transform:
     rotateX(0deg)
-    rotateY(-5deg)
+    rotateY(-10deg)
     rotateZ(0deg);
 }
 .letter:after{
@@ -95,14 +95,14 @@ div.foo{
   color: #fafafa;
   transform:
     rotateX(0deg)
-    rotateY(-40deg)
+    rotateY(-20deg)
     rotateZ(0deg);
 }
 .letter:hover:after{
   transform:
     scale(1.08,1)
     rotateX(0deg)
-    rotateY(40deg)
+    rotateY(20deg)
     rotateZ(0deg)
     skew(0deg,22deg);
 }
