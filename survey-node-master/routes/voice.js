@@ -18,7 +18,6 @@ exports.interview = function(request, response) {
         response.type('text/xml');
         response.send(twiml.toString());
     }
-
     // Find an in-progess survey if one exists, otherwise create one
     SurveyResponse.advanceSurvey({
         phone: phone,
@@ -26,6 +25,7 @@ exports.interview = function(request, response) {
         survey: survey
     }, function(err, surveyResponse, questionIndex) {
         var question = survey[questionIndex];
+        //var isFirstBooleanQuestion = 1;
 
         if (err || !surveyResponse) {
             say('Terribly sorry, but an error has occurred. Goodbye.');
@@ -40,8 +40,8 @@ exports.interview = function(request, response) {
 
         // Add a greeting if this is the first question
         if (questionIndex === 0) {
-            say('Thank you for taking our survey. Please listen carefully '
-                + 'to the following questions.');
+            say('This is Shealth. We are here to help you diagnose your disease'
+                + 'and help you find our community health volunteer.');
         }
 
         // Otherwise, ask the next question
@@ -58,19 +58,24 @@ exports.interview = function(request, response) {
                     + '/transcribe/' + questionIndex,
                 maxLength: 60
             });
-        } else if (question.type === 'boolean') {
-            say('Press one for "yes", and any other key for "no".');
+        } else if (question.type === 'boolean' && questionIndex === 1) {
+            say('Press one for "yes", and any other key for "no" for the following question.');
             twiml.gather({
                 timeout: 10,
                 numDigits: 1
             });
-        } else {
+        } else if (question.type === 'number'){
             // Only other supported type is number
             say('Enter the number using the number keys on your telephone.' 
                 + ' Press star to finish.');
             twiml.gather({
                 timeout: 10,
                 finishOnKey: '*'
+            });
+        } else {
+            twiml.gather({
+                timeout: 10,
+                numDigits: 1
             });
         }
 

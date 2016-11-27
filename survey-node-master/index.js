@@ -12,7 +12,6 @@ var results = require('./routes/results');
 // initialize MongoDB connection
 mongoose.connect(config.mongoUrl);
 
-
 // Create Express web app with some useful middleware
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
