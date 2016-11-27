@@ -51,12 +51,12 @@ var patientID = 0;
 
 //testcode.js
 var phone = 123459999;
-var resultA = [1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var resultA = [true, true, false, true, false, false, false, false, false, false];
 var patientID = 0;
 
-var resultLiteral = ["age", "sex", "fatigue", "headache", "dizziness",
-       				 "nausea", "vomit", "fever", "rashes", "diarrhea",
-					 "constipation", "cough", "sore throat", "missed period"];
+var resultLiteral = ["age", "sex", "fatigue", "headache",
+       				 "vomit", "fever", "rashes", "diarrhea",
+					 "cough", "missed period"];
 var person1 = new User(phone, resultA);
 
 
@@ -71,41 +71,46 @@ data(person1.getPhone(), person1.getSymptoms());
 function User(phone, resultArray) {
 	this.id = patientID++;
 	this.phone = phone;
-	this.age = setAge(resultArray); //returns age
+	this.age =  resultArray[0];//returns age
 	this.sex = setSex(resultArray);
 	/*this.region = function to get region num;*/
 	this.results = surveyResults(resultArray, resultLiteral);
 	this.resultsBin = surveyResultsBin(resultArray);
 	this.getID = function() { return this.id; };
 	this.getPhone = function() { return this.phone;	};
-	this.getAge = function() { return this.age; };
+	this.getAge = function() { return setAge(resultArray); };
 	this.getSex = function() { return this.sex; };
 	this.getSymptoms = function() { return this.results; };
 }
 
 function setAge(resultArray) {
 	//index 0
-	var age;
-	switch(resultArray[0]) {
-		case 0: age = "10--";
-			    break;
-		case 1: age = "10 - 20";
-			    break;
-		case 2: age = "20 - 30";
-			    break;
-		case 3: age = "30 - 40";
-			    break;
-		case 4: age = "40 - 50";
-			    break;
-		case 5: age = "50++";
-			    break;
+	var age = resultArray[0];
+	if(age < 10){
+		agerange = "< 10";
 	}
-	return age;
+	else if(age < 20) {
+		agerange = "10 - 20";
+	}
+	else if (age < 30) {
+		agerange = "20 - 30";
+	}
+	else if(age < 40) {
+		agerange = "30 - 40";
+	}
+	else if(age < 50) {
+		agerange = "40 - 50";
+	}
+	else{
+		agerange = "> 50";
+	}
+	
+	return agerange;
 }
 
 function setSex(resultArray) {
 	//index 2
-	return ((resultArray[1] == 0)? "M":"F");
+	return ((resultArray[1] == false)? "M":"F");
 }
 
 function surveyResults(resultArray, resultLiteral) {
@@ -113,7 +118,7 @@ function surveyResults(resultArray, resultLiteral) {
 	var index = 0;
 	//since index 0 and 1 is age and sex, start with index = 2
 	for(var i = 2; i < 14; i++) {
-		if(resultArray[i] == 1) {
+		if(resultArray[i] == true) {
       //results.push(resultLiteral[i]);
       //console.log(resultLiteral);
       //console.log(results);
