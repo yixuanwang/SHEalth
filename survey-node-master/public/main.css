@@ -20,10 +20,22 @@ td {
 	color: #d33682;
 }
 
+#loginBody {
+  background-color: pink;
+  font-family:Raleway, Open Sans, Droid Sans, Roboto,arial, sans-serif;
+}
+
 body {
+  background-color: lightcyan;
+  font-family:Raleway, Open Sans, Droid Sans, Roboto,arial, sans-serif;
+}
+
+/*
+.surveyStat {
 	background-color: black;
 	font-family:Raleway, Open Sans, Droid Sans, Roboto,arial, sans-serif;
 }
+*/
 
 @import url(http://fonts.googleapis.com/css?family=Lato:900);
 *, *:before, *:after{
