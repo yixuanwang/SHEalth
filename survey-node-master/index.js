@@ -32,8 +32,3 @@ var server = http.createServer(app);
 server.listen(config.port, function() {
     console.log('Express server started on *:'+config.port);
 });
-
-var handlebars = require('express3-handlebars')
-	.create({ defaultLayout:'main' });
-app.engine('handlebars', handlebars.engine);
-app.set('view engine', 'handlebars');
