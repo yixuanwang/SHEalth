@@ -12,6 +12,7 @@ var results = require('./routes/results');
 // initialize MongoDB connection
 mongoose.connect(config.mongoUrl);
 
+
 // Create Express web app with some useful middleware
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
@@ -31,3 +32,8 @@ var server = http.createServer(app);
 server.listen(config.port, function() {
     console.log('Express server started on *:'+config.port);
 });
+
+var handlebars = require('express3-handlebars')
+	.create({ defaultLayout:'main' });
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
