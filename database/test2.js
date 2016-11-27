@@ -48,8 +48,12 @@ function data (phone, symptom)
 };
 
 //testcode.js
-var phone = 1234567890;
+var phone = 123459999;
 var resultA = [1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var patientID = 0;
+var resultLiteral = ["age", "sex", "fatigue", "headache", "dizziness",
+						   "nausea", "vomit", "fever", "rashes", "diarrhea",
+						   "constipation", "cough", "sore throat", "missed period"];
 
 var person1 = new User(phone, resultA);
 
@@ -61,24 +65,24 @@ data(person1.getPhone(), person1.getSymptoms());
 
 //userfct.js
 //fct that creates new user db type
-static var patientID = 0;
+
+//console.log(resultLiteral);
 function User(phone, resultArray) {
 	this.id = patientID++;
 	this.phone = phone;
 	this.age = setAge(resultArray); //returns age
 	this.sex = setSex(resultArray);
 	/*this.region = function to get region num;*/
-	this.results = surveyResults();
+
+  //console.log(resultLiteral);
+  //console.log(patientID);
+	this.results = surveyResults(resultArray, resultLiteral);
 	this.getID = function() { return this.id; };
 	this.getPhone = function() { return this.phone;	};
 	this.getAge = function() { return this.age; };
 	this.getSex = function() { return this.sex; };
 	this.getSymptoms = function() { return this.results; };
-}  
-
-const var resultLiteral = ["age", "sex", "fatigue", "headache", "dizziness",
-						   "nausea", "vomit", "fever", "rashes", "diarrhea",
-						   "constipation", "cough", "sore throat", "missed period"];
+};
 
 function setAge(resultArray) {
 	//index 0
@@ -106,12 +110,16 @@ function setSex(resultArray) {
 }
 
 function surveyResults(resultArray, resultLiteral) {
-	var results;
+	var results = [];
 	var index = 0;
 	//since index 0 and 1 is age and sex, start with index = 2
-	for(i = 2; i < resultArray.length; i++) {
+	for(var i = 2; i < 14; i++) {
 		if(resultArray[i] == 1) {
-			results[index++] = resultLiteral[i];
+      //results.push(resultLiteral[i]);
+      //console.log(resultLiteral);
+      //console.log(results);
+      results[index] = resultLiteral[i];
+      index = index+1;
 		}
 	}
 
