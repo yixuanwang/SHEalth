@@ -1,4 +1,4 @@
-#SHEalth
+# SHEalth
 ## Inspiration
 We were tasked with making healthcare more accessible in countries such as Bangladesh. We needed to create an app that could be used with little to no internet, that offered simple communication, and that put the user's health at the front. Something that could make the person who used the app feel supported, by their local health care worker or even someone in their community in the same situation.
 >The result became one part voice call/SMS bot, one part portal to the status of people in the community, also known as two parts SHEalth.
